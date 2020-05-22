@@ -67,7 +67,7 @@ async function enviarEmail(assuntoEmail, corpoEmail) {
   
   const mailOptions = {
     from: 'gapsiemail@gmail.com',
-    to: 'gabriel.nicolau@usp.br',
+    to: 'leonardogiovannip@gmail.com',
     subject: assuntoEmail,
     text: corpoEmail
   };
