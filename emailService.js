@@ -45,14 +45,57 @@ module.exports = {
 }
 
 function formularCorpoEmail(dadosRespostas) {
-  let apresentacao = `Olá, Gapsi\n\nO usuário ${dadosRespostas.usuario.nome} respondeu o questionário ${dadosRespostas.questionario.nome} da seguinte maneira:\n\n`;
+  let apresentacao = `Olá, Gapsi/Apoia!\n\n\nO usuário ${dadosRespostas.usuario.nome} respondeu o questionário ${dadosRespostas.questionario.nome} da seguinte maneira:\n\n`;
   let qtdRespostas = Object.keys(dadosRespostas.questionario.respostas).length;
   let respostas = "";
-  for (let i=1; i<=qtdRespostas; i++) {
-    respostas = respostas.concat(`${i} - ${dadosRespostas.questionario.respostas[i].pergunta}\nR: ${dadosRespostas.questionario.respostas[i].resposta}\n\n`);
+
+  if(dadosRespostas.questionario.nome == "SRQ-20"){
+      for (let i=1; i<=qtdRespostas; i++) {
+        respostas = respostas.concat(`${i} - ${dadosRespostas.questionario.respostas[i].pergunta}\nR: ${dadosRespostas.questionario.respostas[i].resposta}\n\n`);
+      }
+  }
+  else if(dadosRespostas.questionario.nome == "Columbia"){
+      if(dadosRespostas.questionario.respostas[2].resposta == "nao"){
+          for (let i=1; i<=2; i++) {
+            respostas = respostas.concat(`${i} - ${dadosRespostas.questionario.respostas[i].pergunta}\nR: ${dadosRespostas.questionario.respostas[i].resposta}\n\n`);
+          }
+
+          respostas = respostas.concat(`6 - ${dadosRespostas.questionario.respostas[6].pergunta}\nR: ${dadosRespostas.questionario.respostas[6].resposta}\n\n`);
+      }
+      else{
+          for (let i=1; i<=qtdRespostas; i++) {
+            respostas = respostas.concat(`${i} - ${dadosRespostas.questionario.respostas[i].pergunta}\nR: ${dadosRespostas.questionario.respostas[i].resposta}\n\n`);
+          }
+      }
   }
 
-  const corpoEmail = apresentacao.concat(respostas);
+    let finalizacao;
+
+    if(dadosRespostas.questionario.nome == "SRQ-20"){
+        let nroPos, aux;
+
+        if(dadosRespostas.resultado.charCodeAt(1) < 58 && dadosRespostas.resultado.charCodeAt(1) > 47){
+            nroPos = dadosRespostas.resultado.substring(0, 2);
+            aux = 3;
+        }
+        else{
+            nroPos = dadosRespostas.resultado.substring(0, 1);
+            aux = 2;
+        }
+
+        finalizacao = `\nO número de respostas positivas obtidas foi ${nroPos}.\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} ${dadosRespostas.resultado.substring(aux, dadosRespostas.resultado.lenght).toLowerCase()}.`;
+    }
+    else if(dadosRespostas.questionario.nome == "Columbia"){
+        if(dadosRespostas.resultado.toLowerCase() != "sem risco"){
+            finalizacao = `\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} apresenta ${dadosRespostas.resultado.toLowerCase()}.`;
+        }
+        else{
+            finalizacao = `\nCom base nas respostas dadas, o usuário ${dadosRespostas.usuario.nome} não apresenta risco.`
+        }
+    }
+
+  const corpoEmail = apresentacao.concat(respostas).concat(finalizacao);
+
   return corpoEmail;
 }
 
@@ -64,14 +107,14 @@ async function enviarEmail(assuntoEmail, corpoEmail) {
       pass: "m5'{eU^-aq_>eZGJ"
     }
   });
-  
+
   const mailOptions = {
     from: 'gapsiemail@gmail.com',
-    to: 'leonardogiovannip@gmail.com',
+    to: 'giidaniele9@gmail.com',
     subject: assuntoEmail,
     text: corpoEmail
   };
-  
+
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       console.log(error);
