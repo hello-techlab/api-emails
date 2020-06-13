@@ -86,7 +86,7 @@ function formularCorpoEmail(dadosRespostas) {
         finalizacao = `\nO número de respostas positivas obtidas foi ${nroPos}.\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} ${dadosRespostas.resultado.substring(aux, dadosRespostas.resultado.lenght).toLowerCase()}.`;
     }
     else if(dadosRespostas.questionario.nome == "Columbia"){
-        if(dadosRespostas.resultado.toLowerCase() != "sem risco"){
+        if(dadosRespostas.resultado.toLowerCase() != "sem risco de suicício"){
             finalizacao = `\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} apresenta ${dadosRespostas.resultado.toLowerCase()}.`;
         }
         else{
