@@ -45,7 +45,7 @@ module.exports = {
 }
 
 function formularCorpoEmail(dadosRespostas) {
-  let apresentacao = `Olá, Gapsi/Apoia!\n\n\nO usuário ${dadosRespostas.usuario.nome} respondeu o questionário ${dadosRespostas.questionario.nome} da seguinte maneira:\n\n`;
+  let apresentacao = `Olá, GAPsi/Apoia!\n\n\nO usuário ${dadosRespostas.usuario.nome} respondeu o questionário ${dadosRespostas.questionario.nome} da seguinte maneira:\n\n`;
   let qtdRespostas = Object.keys(dadosRespostas.questionario.respostas).length;
   let respostas = "";
 
