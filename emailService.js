@@ -51,19 +51,35 @@ function formularCorpoEmail(dadosRespostas) {
 
   if(dadosRespostas.questionario.nome == "SRQ-20"){
       for (let i=1; i<=qtdRespostas; i++) {
+          if(dadosRespostas.questionario.respostas[i].resposta == "nao")
+              dadosRespostas.questionario.respostas[i].resposta = "Não";
+          else dadosRespostas.questionario.respostas[i].resposta = "Sim";
+
         respostas = respostas.concat(`${i} - ${dadosRespostas.questionario.respostas[i].pergunta}\nR: ${dadosRespostas.questionario.respostas[i].resposta}\n\n`);
       }
   }
   else if(dadosRespostas.questionario.nome == "Columbia"){
       if(dadosRespostas.questionario.respostas[2].resposta == "nao"){
           for (let i=1; i<=2; i++) {
+              if(dadosRespostas.questionario.respostas[i].resposta == "nao")
+                  dadosRespostas.questionario.respostas[i].resposta = "Não";
+              else dadosRespostas.questionario.respostas[i].resposta = "Sim";
+
             respostas = respostas.concat(`${i} - ${dadosRespostas.questionario.respostas[i].pergunta}\nR: ${dadosRespostas.questionario.respostas[i].resposta}\n\n`);
           }
+
+          if(dadosRespostas.questionario.respostas[6].resposta == "nao")
+              dadosRespostas.questionario.respostas[6].resposta = "Não";
+          else dadosRespostas.questionario.respostas[6].resposta = "Sim";
 
           respostas = respostas.concat(`6 - ${dadosRespostas.questionario.respostas[6].pergunta}\nR: ${dadosRespostas.questionario.respostas[6].resposta}\n\n`);
       }
       else{
           for (let i=1; i<=qtdRespostas; i++) {
+            if(dadosRespostas.questionario.respostas[i].resposta == "nao")
+                dadosRespostas.questionario.respostas[i].resposta = "Não";
+            else dadosRespostas.questionario.respostas[i].resposta = "Sim";
+
             respostas = respostas.concat(`${i} - ${dadosRespostas.questionario.respostas[i].pergunta}\nR: ${dadosRespostas.questionario.respostas[i].resposta}\n\n`);
           }
       }
@@ -87,7 +103,7 @@ function formularCorpoEmail(dadosRespostas) {
     }
     else if(dadosRespostas.questionario.nome == "Columbia"){
         if(dadosRespostas.resultado.toLowerCase() != "sem risco de suicício"){
-            finalizacao = `\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} apresenta ${dadosRespostas.resultado.toLowerCase()}.`;
+            finalizacao = `\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} apresenta ${dadosRespostas.resultado.toLowerCase()}.\nO mesmo foi aconselhado a procurar acolhimento.`;
         }
         else{
             finalizacao = `\nCom base nas respostas dadas, o usuário ${dadosRespostas.usuario.nome} não apresenta risco.`
