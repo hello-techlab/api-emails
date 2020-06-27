@@ -120,15 +120,15 @@ async function enviarEmail(assuntoEmail, corpoEmail, destinoEmail) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'gapsiemail@gmail.com',
-      pass: "m5'{eU^-aq_>eZGJ"
+      user: process.env.emailGapsi,
+      pass: process.env.emailPwd
     }
   });
 
   const mailOptions = {
-    from: 'gapsiemail@gmail.com',
-    // to: 'giidaniele9@gmail.com',
-    to: destinoEmail,
+    from: process.env.emailGapsi,
+    to: 'giidaniele9@gmail.com',
+    // to: destinoEmail,
     subject: assuntoEmail,
     text: corpoEmail
   };

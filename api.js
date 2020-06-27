@@ -6,8 +6,8 @@ const emailService = require('./emailService.js');
 
 //Routes
 router.post('/email/relatorio/enviar', emailService.enviarRelatorio);
-router.post('/teste', (req, res) => {
-  res.send('hello, sir');
+router.get('/test', (req, res) => {
+  res.send({email: process.env.emailGapsi, pwd:process.env.emailPwd });
 })
 
 module.exports = router;
