@@ -30,7 +30,7 @@ async function enviarRelatorio (req, res) {
     const dadosRespostas = req.body;
     const assuntoEmail = `Nova resposta de questionário! | Respostas de ${dadosRespostas.usuario.nome} ao questionário ${dadosRespostas.questionario.nome}`;
     const corpoEmail = formularCorpoEmail(dadosRespostas);
-    await enviarEmail(assuntoEmail, corpoEmail);
+    await enviarEmail(assuntoEmail, corpoEmail, req.userEmail);
 
     res.status(200).send('Email enviado');
     // res.status(200).send(corpoEmail);
@@ -115,7 +115,7 @@ function formularCorpoEmail(dadosRespostas) {
   return corpoEmail;
 }
 
-async function enviarEmail(assuntoEmail, corpoEmail) {
+async function enviarEmail(assuntoEmail, corpoEmail, destinoEmail) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -126,7 +126,8 @@ async function enviarEmail(assuntoEmail, corpoEmail) {
 
   const mailOptions = {
     from: 'gapsiemail@gmail.com',
-    to: 'giidaniele9@gmail.com',
+    // to: 'giidaniele9@gmail.com',
+    to: destinoEmail,
     subject: assuntoEmail,
     text: corpoEmail
   };
