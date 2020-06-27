@@ -30,6 +30,7 @@ async function enviarRelatorio (req, res) {
     const dadosRespostas = req.body;
     const assuntoEmail = `Nova resposta de questionário! | Respostas de ${dadosRespostas.usuario.nome} ao questionário ${dadosRespostas.questionario.nome}`;
     const corpoEmail = formularCorpoEmail(dadosRespostas);
+    console.log('Enviando email para', req.userEmail);
     await enviarEmail(assuntoEmail, corpoEmail, req.userEmail);
 
     res.status(200).send('Email enviado');
