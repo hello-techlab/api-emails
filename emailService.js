@@ -100,14 +100,14 @@ function formularCorpoEmail(dadosRespostas) {
             aux = 2;
         }
 
-        finalizacao = `\nO número de respostas positivas obtidas foi ${nroPos}.\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} ${dadosRespostas.resultado.substring(aux, dadosRespostas.resultado.lenght).toLowerCase()}.`;
+        finalizacao = `\nO número de respostas positivas obtidas foi ${nroPos}.\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} ${dadosRespostas.resultado.substring(aux, dadosRespostas.resultado.lenght).toLowerCase()}. \nO mesmo pode ser contatado através do e-mail ${dadosRespostas.usuario.email}.`;
     }
     else if(dadosRespostas.questionario.nome == "Columbia"){
-        if(dadosRespostas.resultado.toLowerCase() != "sem risco de suicício"){
-            finalizacao = `\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} apresenta ${dadosRespostas.resultado.toLowerCase()}.\nO mesmo foi aconselhado a procurar acolhimento.`;
+        if(dadosRespostas.resultado.toLowerCase() != "sem risco de suicídio"){
+            finalizacao = `\nCom base nas respostas, o usuário ${dadosRespostas.usuario.nome} apresenta ${dadosRespostas.resultado.toLowerCase()}.\nO mesmo foi aconselhado a procurar acolhimento, e pode ser contatado através do e-mail ${dadosRespostas.usuario.email}.`;
         }
         else{
-            finalizacao = `\nCom base nas respostas dadas, o usuário ${dadosRespostas.usuario.nome} não apresenta risco.`
+            finalizacao = `\nCom base nas respostas dadas, o usuário ${dadosRespostas.usuario.nome} não apresenta risco. \nO mesmo pode ser contatado através do e-mail ${dadosRespostas.usuario.email}.`
         }
     }
 
