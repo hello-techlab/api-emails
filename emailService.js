@@ -134,7 +134,14 @@ async function enviarPedidoAgend (req, res) {
 
 function formularCorpoEmailAgend(dadosAgend) {
   let apresentacao = `Olá, GAPsi/Apoia!\n\nO usuário ${dadosAgend.usuario.nome} requisitou o seguinte horário especial para acolhimento: `;
-  let dtSolicitacao = `${dadosAgend.dataHora.getDate()}/${dadosAgend.dataHora.getMonth()}/${dadosAgend.dataHora.getUTCFullYear()} às ${dadosAgend.dataHora.getHours()}:${dadosAgend.dataHora.getMinutes()}.\n\n`;
+
+  let ano = dadosAgend.dataHora.substring(0, 4);
+  let mes = dadosAgend.dataHora.substring(5, 7);
+  let dia = dadosAgend.dataHora.substring(8, 10);
+
+  let hora = dadosAgend.dataHora.substring(11, 16);
+
+  let dtSolicitacao = `${dia}/${mes}/${ano} às ${hora}.\n\n`;
   let finalizacao = `Entre em contato com o mesmo através do e-mail ${dadosAgend.usuario.email} e acerte os detalhes do agendamento, indicando se há disponibilidade ou não do acolhimento ser feito na data e na hora requisitadas.`;
 
   let email = apresentacao.concat(dtSolicitacao).concat(finalizacao);
