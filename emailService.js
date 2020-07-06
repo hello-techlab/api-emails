@@ -139,7 +139,7 @@ function formularCorpoEmailAgend(dadosAgend) {
 
   let email = apresentacao.concat(dtSolicitacao).concat(finalizacao);
 
-  if(dadosAgend.flagUrgente == "true"){
+  if(dadosAgend.flagUrgente){
       let urgencia = `\n\nAtenção: o usuário declarou urgência em seu pedido de agendamento. Responda-o o quanto antes!`
 
       email = email.concat(urgencia);
