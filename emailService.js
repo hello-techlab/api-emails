@@ -1,37 +1,12 @@
 const nodemailer = require('nodemailer');
 
-//Formato do objeto recebido
-// {
-//   usuario: {
-//     nome: str,
-//     nusp: int
-//   },
-//   questionario: {
-//     nome: str,
-//     respostas: {
-//       1: {
-//        pergunta: str,
-//        resposta: str,
-//       },
-//       2: {
-//        pergunta: str,
-//        resposta: str,
-//       },
-//       3: {
-//        pergunta: str,
-//        resposta: str,
-//       },
-//       ...
-//     }
-//   }
-// }
 async function enviarRelatorio (req, res) {
   try {
     const dadosRespostas = req.body;
     const assuntoEmail = `Nova resposta de questionário! | Respostas de ${dadosRespostas.usuario.nome} ao questionário ${dadosRespostas.questionario.nome}`;
     const corpoEmail = formularCorpoEmail(dadosRespostas);
-    console.log('Enviando email para', req.userEmail);
-    await enviarEmail(assuntoEmail, corpoEmail, req.userEmail);
+    console.log('Enviando email para', 'gapsiemail@gmail.com'); // gapsi@icmc.usp.br
+    await enviarEmail(assuntoEmail, corpoEmail, 'gapsiemail@gmail.com') // gapsi@icmc.usp.br
 
     res.status(200).send('Email enviado');
     // res.status(200).send(corpoEmail);
@@ -39,10 +14,6 @@ async function enviarRelatorio (req, res) {
     console.log(err);
     res.status(400).json({error: 'Erro ao enviar respostas por email. Consulte o console do server para mais detalhes'});
   }
-}
-
-module.exports = {
-  enviarRelatorio
 }
 
 function formularCorpoEmail(dadosRespostas) {
@@ -121,8 +92,8 @@ async function enviarPedidoAgend (req, res) {
     const dadosAgend = req.body;
     const assuntoEmail = `Nova solicitação de horário de agendamento! | Feita por ${dadosAgend.usuario.nome}`;
     const corpoEmail = formularCorpoEmailAgend(dadosAgend);
-    console.log('Enviando email para', req.userEmail);
-    await enviarEmail(assuntoEmail, corpoEmail, req.userEmail);
+    console.log('Enviando email para', dadosAgend.usuario.email);
+    await enviarEmail(assuntoEmail, corpoEmail, dadosAgend.usuario.email);
 
     res.status(200).send('Email enviado');
     // res.status(200).send(corpoEmail);
@@ -168,8 +139,7 @@ async function enviarEmail(assuntoEmail, corpoEmail, destinoEmail) {
 
   const mailOptions = {
     from: process.env.emailGapsi,
-    to: 'giidaniele9@gmail.com',
-    // to: destinoEmail,
+    to: destinoEmail,
     subject: assuntoEmail,
     text: corpoEmail
   };
