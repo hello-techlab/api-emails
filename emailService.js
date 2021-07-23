@@ -92,8 +92,8 @@ async function enviarPedidoAgend (req, res) {
     const dadosAgend = req.body;
     const assuntoEmail = `Nova solicitação de horário de agendamento! | Feita por ${dadosAgend.usuario.nome}`;
     const corpoEmail = formularCorpoEmailAgend(dadosAgend);
-    console.log('Enviando email para', dadosAgend.usuario.email);
-    await enviarEmail(assuntoEmail, corpoEmail, dadosAgend.usuario.email);
+    console.log('Enviando email para', 'gapsiemail@gmail.com');
+    await enviarEmail(assuntoEmail, corpoEmail, 'gapsiemail@gmail.com');
 
     res.status(200).send('Email enviado');
     // res.status(200).send(corpoEmail);
